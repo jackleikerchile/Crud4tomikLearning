@@ -26,6 +26,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Si todo tiene exito
     // if everything is successful
     alert.classList.add('d-none');
+    // Esto es para insertar una fila y con el innerHTML se va duplicando
+    // That is to insert a row and with the innerHTML it is duplicated
+    const row = table.insertRow();
+    row.innerHTML = `
+    <td>${title.value}</td>
+    <td>${description.value}</td>
+    <td class="text-center">
+      <input type="checkbox">
+    </td>
+    <td class="text-right">
+      <button class="btn btn-primary mb-1">
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button class="btn btn-danger mb-1 ml-1">
+        <i class="fa fa-trash"></i>
+      </button>
+    </td> 
+    `;
   }
 
   btn.onclick = addTodo;
