@@ -6,12 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const table = document.getElementById('table');
   const alert = document.getElementById('alert');
   const btn = document.getElementById('add');
-
+  let id = 1;
   // Show values integer by console
   // btn.onclick = function() {
   //   console.log('Title:', title.value);
   //   console.log('Description:', description.value);
   // }
+
+  function removeTodo(id) {
+    //console.log(id);
+    document.getElementById(id).remove();
+  }
 
   function addTodo() {
     if (title.value === '' || description.value === '') {
@@ -29,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Esto es para insertar una fila y con el innerHTML se va duplicando
     // That is to insert a row and with the innerHTML it is duplicated
     const row = table.insertRow();
+    // Vamos a incrementar el id pues porque cuando se incremnte no sea el mismo
+    row.setAttribute('id', id++)
     row.innerHTML = `
     <td>${title.value}</td>
     <td>${description.value}</td>
@@ -39,11 +46,21 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="btn btn-primary mb-1">
         <i class="fa fa-pencil"></i>
       </button>
-      <button class="btn btn-danger mb-1 ml-1">
-        <i class="fa fa-trash"></i>
-      </button>
     </td> 
     `;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
+    removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
+    //console.log(row.children);
+    //console.log(row.children[3]);
+    removeBtn.onclick = function(e) {
+      //console.log('Borrando fila...')
+      //console.log(e.target.parentNode);
+      removeTodo(row.getAttribute('id'));
+    }
+    // En el row a este elemento seleccionado me a;ada el button removeBtn
+    row.children[3].appendChild(removeBtn)
   }
 
   btn.onclick = addTodo;
